@@ -1,0 +1,126 @@
+{% extends "base.html" %} {% block title %}Home{% endblock %} {% block content %}
+
+    <h4>Device Info</h4>
+    Device ID: {{ properties.get('device_id') }} <br />
+    Location: {{ properties.get('zip') }}<br />
+
+    <br />
+    <div class="container border border-secondary p-3 rounded">
+            <div class="row justify-content-between">
+                <div class="col">
+                    <h4>Current Status </h4>
+                </div>
+                <div class="col">
+                    <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"
+                            data-bs-target="#op_change_modal">Change</button>
+                </div>
+
+            </div>
+            <div class="row justify-content-start">
+                <div class="col-2"></div>
+                <div class="col-1">
+                    Watering:
+                </div>
+                <div class="col-1">
+                    <span class="badge bg-secondary">OFF</span>
+                </div>
+                <div class="col-1">
+                    <span class="badge bg-secondary">AUTO</span>
+                </div>
+
+            </div>
+            <div class="row justify-content-start">
+                <div class="col-2"></div>
+                <div class="col-1">
+                    Power:
+                </div>
+                <div class="col-1">
+                    <span class="badge bg-secondary">GRID</span>
+                </div>
+                <div class="col-1">
+                    <span class="badge bg-secondary">AUTO</span>
+                </div>
+            </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="op_change_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Send Command</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <section class="create-user-form container">
+                        <form method="post">
+                            Watering:
+        <div class="btn-group" role="group" aria-label="toggle button group">
+            <input type="radio" class="btn-check" name="btnradio" id="btnradio1" onselect="water_start_stop();"
+                   autocomplete="off" checked>
+            <label class="btn btn-outline-primary" for="btnradio1">Run</label>
+
+            <input type="radio" class="btn-check" name="btnradio" id="btnradio2" onselect="water_start_stop();"
+                   autocomplete="off">
+            <label class="btn btn-outline-primary" for="btnradio2">Idle</label>
+        </div>
+
+
+        Power:
+        <div class="btn-group" role="group" aria-label="toggle button group3">
+            <input type="radio" class="btn-check" name="btnradioy" id="btnradio5" oncselect="power_grid_battery();"
+                   autocomplete="off" checked>
+            <label class="btn btn-outline-primary" for="btnradio5">Grid</label>
+
+            <input type="radio" class="btn-check" name="btnradioy" id="btnradio6" onselect="power_grid_battery();"
+                   autocomplete="off">
+            <label class="btn btn-outline-primary" for="btnradio6">Battery</label>
+        </div>
+                        </form>
+                    </section>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <form action="/index" method="post">
+                       <!-- <button type="submit">Save changes</button> -->
+                       <button type="button" class="btn btn-primary">Save changes</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container border border-secondary p-3">
+        <h4>Schedule</h4>
+        <span class="badge bg-secondary">Every Day</span>
+        <span class="badge bg-secondary">2 times</span>
+        <span class="badge bg-secondary">Starting at 7am</span>
+        <span class="badge bg-secondary">Ending at 3pm</span>
+    </div>
+
+    <div class="container border border-secondary p-3">
+        <h4>Recent Samples</h4>
+        <table class="table table-sm table-light table-striped">
+            <thead>
+            {% if data %}
+                <tr>
+                    {% for heading in headings %}
+                    <th scope="col"> {{ heading }} </th>
+                    {% endfor %}
+                </tr>
+            {% endif %}
+            </thead>
+
+            <tbody>
+            <!-- table rows -->
+                {% for dict_item in data %}
+                <tr>
+                    {% for value in dict_item.values() %}
+                    <td class="table__cell"> {{ value }} </td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

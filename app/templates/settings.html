@@ -1,0 +1,32 @@
+{% extends "base.html" %} {% block title %}Settings{% endblock %} {% block content %}
+
+<form method="POST">
+    <h3 align="center">Update ZIP</h3>
+
+    <div class="form-group">
+
+        <label for="zip">New ZIP</label>
+
+        <input
+
+          type="number"
+
+          class="form-control"
+
+          id="zip"
+
+          name="zip"
+
+          placeholder="00000"
+
+        />
+
+    </div>
+
+    <br />
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+
+</form>
+
+{% endblock %}

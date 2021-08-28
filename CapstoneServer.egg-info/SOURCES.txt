@@ -1,0 +1,14 @@
+MANIFEST.in
+README.md
+setup.py
+CapstoneServer.egg-info/PKG-INFO
+CapstoneServer.egg-info/SOURCES.txt
+CapstoneServer.egg-info/dependency_links.txt
+CapstoneServer.egg-info/not-zip-safe
+CapstoneServer.egg-info/requires.txt
+CapstoneServer.egg-info/top_level.txt
+app/__init__.py
+app/auth.py
+app/aws_controller.py
+app/models.py
+app/views.py
